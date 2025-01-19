@@ -1,4 +1,5 @@
 ﻿using FirstApi.Business.Abstract;
+using FirstApi.DataAccess.Abstract;
 using FirstApi.Entity.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,34 +11,41 @@ namespace FirstApi.Business.Concrete
 {
     public class CategoryManager : ICategoryService
     {
+        private ICategoryDal _categoryDal;
+
+        public CategoryManager(ICategoryDal categoryDal)
+        {
+            _categoryDal = categoryDal;
+        }
+
         public List<Category> GetAll()
         {
-            throw new NotImplementedException();
+            return _categoryDal.GetAll();
         }
 
         public IQueryable<Category> GetAllQueryable()
         {
-            throw new NotImplementedException();
+            return _categoryDal.GetAllQueryable();
         }
 
         public Category GetById(int id)
         {
-            throw new NotImplementedException();
+            return _categoryDal.Get(x => x.Id == id);
         }
 
         public void Insert(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryDal.Add(entity);
         }
 
         public void Modify(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryDal.Update(entity);
         }
 
         public void Remove(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryDal.Delete(entity);
         }
     }
 }

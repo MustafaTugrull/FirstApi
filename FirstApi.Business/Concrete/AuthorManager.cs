@@ -20,37 +20,37 @@ namespace FirstApi.Business.Concrete
 
         public List<Author> GetAll()
         {
-            throw new NotImplementedException();
+            return _authorDal.GetAll();
         }
 
         public IQueryable<Author> GetAllQueryable()
         {
-            throw new NotImplementedException();
+            return _authorDal.GetAllQueryable();
         }
 
         public Author GetById(int id)
         {
-            throw new NotImplementedException();
+            return _authorDal.Get(x => x.Id == id);
         }
 
         public Author GetIEmailAddress(string email)
         {
-            throw new NotImplementedException();
+            return _authorDal.Get(x => x.Email == email);
         }
 
         public void Insert(Author entity)
         {
-            throw new NotImplementedException();
+            _authorDal.Add(entity);
         }
 
         public void Modify(Author entity)
         {
-            throw new NotImplementedException();
+            _authorDal.Update(entity);
         }
 
         public void Remove(Author entity)
         {
-            throw new NotImplementedException();
+            _authorDal.Delete(entity);
         }
     }
 }
