@@ -1,3 +1,6 @@
+using FirstApi.Business.Abstract;
+using FirstApi.Business.Concrete;
+using FirstApi.DataAccess.Abstract;
 using FirstApi.DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +14,13 @@ builder.Services.AddDbContext<FirstApiDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("firstapiconn"));
 });
+
+builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddScoped<IAuthorDal, EfAuthorDal>();
+builder.Services.AddScoped<IAuthorService, AuthorManager>();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
