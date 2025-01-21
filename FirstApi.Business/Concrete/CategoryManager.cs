@@ -1,6 +1,7 @@
 ﻿using FirstApi.Business.Abstract;
 using FirstApi.DataAccess.Abstract;
 using FirstApi.Entity.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace FirstApi.Business.Concrete
 
         public IQueryable<Category> GetAllQueryable()
         {
-            return _categoryDal.GetAllQueryable();
+            return _categoryDal.GetAllQueryable().Include(c => c.Products);
         }
 
         public Category GetById(int id)
@@ -46,6 +47,23 @@ namespace FirstApi.Business.Concrete
         public void Remove(Category entity)
         {
             _categoryDal.Delete(entity);
+        }
+
+        public IQueryable<object> GetAllWithProducts()
+        {
+            var categories = _categoryDal.GetAllQueryable().Include(x => x.Products)
+                    .Select(x => new
+                    {
+                        x.Name,
+                        Products = x.Products.Select(item => new
+                        {
+                            item.Name,
+                            item.Price,
+                            item.Stock
+                        }).ToList()
+                    });
+
+            return categories;
         }
     }
 }

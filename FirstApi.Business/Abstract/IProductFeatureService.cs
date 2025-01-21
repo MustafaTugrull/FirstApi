@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirstApi.Business.Abstract
 {
-    public interface ICategoryService : IGenericService<Category>
+    public interface IProductFeatureService : IGenericService<ProductFeature>
     {
-        IQueryable<object> GetAllWithProducts();
     }
 }

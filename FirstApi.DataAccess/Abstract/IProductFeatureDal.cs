@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstApi.Business.Abstract
+namespace FirstApi.DataAccess.Abstract
 {
-    public interface ICategoryService : IGenericService<Category>
+    public interface IProductFeatureDal : IEntityRepository<ProductFeature>
     {
-        IQueryable<object> GetAllWithProducts();
     }
 }
